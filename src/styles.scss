@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+html, body { height: 100%; }
+body { 
+  background: #fff;
+  color: rgba(0,0,0,.87);
+  direction: ltr;
+  font-family: 'Roboto',sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+ }
+
+button {
+  &.btn-right {
+    float: right;
+  }
+  &.btn-primary {
+    background: #1a73e8;
+    color: #fff;
+  }
+}
