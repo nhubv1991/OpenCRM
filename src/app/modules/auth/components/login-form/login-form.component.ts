@@ -1,29 +1,18 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  QueryList,
-  ViewChildren
+  Output
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, } from '@angular/forms';
-import { FocusOnErrorDirective } from 'src/app/shared/directives';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent {
 
   @Output() login = new EventEmitter<any>();
-  @ViewChildren(FocusOnErrorDirective) fields: QueryList<FocusOnErrorDirective>;
 
   constructor(private fb: FormBuilder) { }
 
@@ -31,9 +20,6 @@ export class LoginFormComponent implements OnInit {
     username: ['', Validators.required],
     password: ['', Validators.required],
   });
-
-  ngOnInit() {
-  }
 
   get usernameControl() {
     return this.form.get('username') as FormControl;
@@ -53,20 +39,9 @@ export class LoginFormComponent implements OnInit {
 
   loginUser(form: FormGroup) {
     const { value, valid, touched } = form;
-    if (valid && touched) {
+    if (valid) {
       this.login.emit(value);
-    } else {
-      this.setFocus();
     }
   }
 
-  setFocus() {
-    const fields = this.fields.toArray();
-    for (const field of fields) {
-      if (field.invalid) {
-        field.focus();
-        break;
-      }
-    }
-  }
 }

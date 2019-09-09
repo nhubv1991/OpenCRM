@@ -1,15 +1,15 @@
-<form [formGroup]="form" class="login-form" (submit)="loginUser(form)">
+<form [formGroup]="form" class="login-form" appFocusFirstInvalidField (submit)="loginUser(form)">
   <div class="login-form__field">
     <mat-form-field appearance="outline">
       <mat-label>Tài khoản</mat-label>
-      <input appFocusOnError formControlName="username" autocomplete="off" type="text" matInput/>
+      <input formControlName="username" autocomplete="off" type="text" matInput/>
     </mat-form-field>
   </div>
 
   <div class="login-form__field">
     <mat-form-field appearance="outline">
       <mat-label>Mật khẩu</mat-label>
-      <input appFocusOnError formControlName="password" autocomplete="off" type="password" matInput/>
+      <input formControlName="password" autocomplete="off" type="password" matInput/>
     </mat-form-field>
   </div>
 
@@ -17,7 +17,7 @@
     <a class="reset-password link" [routerLink]="['../reset-password']">
       Quên mật khẩu?
     </a>
-    <button mat-button class="btn btn-sm btn-right btn-primary btn-login" type="submit">
+    <button mat-button class="btn btn-sm btn-right btn-primary btn-login">
       Đăng nhập
     </button>
   </div>

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Optional, } from '@angular/core';
+import { Directive, QueryList, ContentChildren, HostListener } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
 @Directive({
@@ -6,13 +6,18 @@ import { NgControl } from '@angular/forms';
 })
 export class FocusOnErrorDirective {
 
-  public get invalid() {
-    return this.control.invalid;
+  @ContentChildren(NgControl) fields: QueryList<NgControl>;
+
+  @HostListener('submit')
+  check() {
+    const fields = this.fields.toArray();
+    for (const field of fields) {
+      if (field.invalid) {
+        (field.valueAccessor as any)._elementRef.nativeElement.focus();
+        break;
+      }
+    }
   }
 
-  public focus() {
-    this.el.nativeElement.focus();
-  }
-
-  constructor(@Optional() private control: NgControl, private el: ElementRef) { }
+  constructor() { }
 }

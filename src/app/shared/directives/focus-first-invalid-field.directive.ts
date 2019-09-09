@@ -11,7 +11,7 @@ export class FocusFirstInvalidFieldDirective {
   onFormSubmit() {
     const invalidElements = this.el.nativeElement.querySelectorAll('.ng-invalid');
     if (invalidElements.length > 0) {
-      invalidElements[0].focus();
+      invalidElements[1].focus();
     }
   }
 }
